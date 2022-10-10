@@ -28,7 +28,7 @@
                 <field name="living_area" string="Living Area (sqm)"/>
                 <field name="facades"/>
                 <separator/>
-                <filter string="Available" name="available" domain="[('date_availability', '>', '%s')]"/>
+                <filter string="Available" name="available" domain="['|', ('state', '=', 'new'), ('state', '=', 'offer_received')]"/>
                 <group expand="1" string="Group By">
                     <filter string="Provider" name="provider" context="{'group_by':'postcode'}"/>
                 </group>
