@@ -20,6 +20,7 @@ class Property(models.Model):
 
     buyer_id = fields.Many2one("res.partner", string="Buyer", copy=False)
     salesperson_id = fields.Many2one("res.users", string="Sales person", default=lambda self: self.env.user)
+    tag_ids = fields.Many2Many("estate.property.tag", string="Tags")
 
     active = fields.Boolean('Active', default=True, help="If unchecked, it will allow you to hide the property without removing it.")
     state = fields.Selection([('new', 'New'), ('offer_received', 'Offer received'), ('sold', 'Sold')], string='Status', default='new', required=True)
