@@ -6,7 +6,7 @@ class Property(models.Model):
 
     name = fields.Char(string='Name', required=True)
     description = fields.Text(string='Description')
-    postcode = fields.Char(string='Poscode')
+    postcode = fields.Char(string='Postcode')
     date_availability = fields.Date(string='Date available', default=lambda self: fields.Datetime.add(fields.Datetime.now(), months=3), copy=False)
     expected_price = fields.Float(string='Expected price', required=True)
     selling_price = fields.Float(string='Selling price', readonly=True, copy=False)
