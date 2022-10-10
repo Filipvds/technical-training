@@ -22,7 +22,6 @@
         <field name="arch" type="xml">
             <form string="Property">
                 <sheet>
-                <sheet>
                     <group>
                         <h3>
                             <field name="name"/>
