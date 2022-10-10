@@ -22,6 +22,9 @@
         <field name="arch" type="xml">
             <form string="Property">
                 <group>
+                    <h3>
+                        <field name="name"/>
+                    </h3>
                     <group>
                         <field name="postcode" />
                         <field name="date_availability" string="Available From"/>
