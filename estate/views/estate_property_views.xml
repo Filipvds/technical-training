@@ -23,16 +23,18 @@
             <form string="Property">
                 <sheet>
                     <group>
-                        <h3>
+                        <h1>
                             <field name="name"/>
-                        </h3>
+                        </h1>
                         <group>
-                            <field name="postcode" />
-                            <field name="date_availability" string="Available From"/>
-                        </group>
-                        <group>
-                            <field name="expected_price" />
-                            <field name="selling_price" />
+                            <group>
+                                <field name="postcode" />
+                                <field name="date_availability" string="Available From"/>
+                            </group>
+                            <group>
+                                <field name="expected_price" />
+                                <field name="selling_price" />
+                            </group>
                         </group>
                     </group>
                     <notebook>
