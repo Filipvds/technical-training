@@ -19,3 +19,4 @@ class Property(models.Model):
     garden_orientation = fields.Selection(string='Orientation',selection=[('north', 'North'), ('east', 'East'), ('south', 'South'), ('west', 'West')])
 
     active = fields.Boolean('Active', default=True, help="If unchecked, it will allow you to hide the property without removing it.")
+    state = fields.Selection([('new', 'New'), ('offer_received', 'Offer received'), ('sold', 'Sold')], string='Status', default='new', required=True)
