@@ -46,6 +46,7 @@
                         <h1>
                             <field name="name"/>
                         </h1>
+                        <field name="state" />
                         <group>
                             <field name="postcode" />
                             <field name="date_availability" string="Available From"/>
