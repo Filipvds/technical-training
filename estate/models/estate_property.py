@@ -17,3 +17,5 @@ class Property(models.Model):
     garden = fields.Boolean(string='Garden')
     garden_area = fields.Integer(string='Garden area')
     garden_orientation = fields.Selection(string='Orientation',selection=[('north', 'North'), ('east', 'East'), ('south', 'South'), ('west', 'West')])
+
+    active = fields.Boolean('Active', default=True, help="If unchecked, it will allow you to hide the property without removing it.")
