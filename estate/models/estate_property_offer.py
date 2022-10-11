@@ -31,7 +31,10 @@ class PropertyOffer(models.Model):
     def create(self, vals_list):
         for vals in vals_list:
             property = self.env['estate.property'].browse(vals['property_id'])
+
             if (vals['price'] <= property.best_offer):
                 raise UserError(_("Price must be higher than %s", property.best_offer))
+
+            property.state = 'offer_received'
 
         return super().create(vals_list)
