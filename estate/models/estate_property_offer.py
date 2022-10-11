@@ -1,4 +1,6 @@
 from odoo import api, fields, models
+from odoo.exceptions import UserError
+from odoo.tools.translate import _
 
 class PropertyOffer(models.Model):
     _name = "estate.property.offer"
@@ -24,3 +26,12 @@ class PropertyOffer(models.Model):
         for record in self:
             create_date = fields.Date.today() if not record.create_date else record.create_date.date()
             record.date_deadline = fields.Datetime.add(create_date, days=record.validity)
+
+    @api.model_create_multi
+    def create(self, vals_list):
+        for vals in vals_list:
+            property = self.env['estate.property'].browse(vals['property_id'])
+            if (vals['price'] <= property.best_offer):
+                raise UserError(_("Price must be higher than %s", property.best_offer))
+
+        return super().create(vals_list)
