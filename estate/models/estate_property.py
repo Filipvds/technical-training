@@ -38,3 +38,8 @@ class Property(models.Model):
     def _compute_best_offer(self):
         for record in self:
             record.best_offer = max(record.offer_ids.mapped('price'))
+
+    @api.onchange("garden")
+    def _onchange_garden(self):
+        self.garden_area = 10 if self.garden else (self._origin.garden_area or False)
+        self.garden_orientation = 'north' if self.garden else (self._origin.garden_orientation or False)
