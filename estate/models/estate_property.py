@@ -1,4 +1,4 @@
-from odoo import fields, models
+from odoo import api, fields, models
 
 class Property(models.Model):
     _name = "estate.property"
@@ -18,6 +18,8 @@ class Property(models.Model):
     garden_area = fields.Integer(string='Garden area')
     garden_orientation = fields.Selection(string='Orientation',selection=[('north', 'North'), ('east', 'East'), ('south', 'South'), ('west', 'West')])
 
+    total_area = fields.Float(compute="_compute_total_area")
+
     buyer_id = fields.Many2one("res.partner", string="Buyer", copy=False)
     salesperson_id = fields.Many2one("res.users", string="Sales person", default=lambda self: self.env.user)
     tag_ids = fields.Many2many("estate.property.tag", string="Tags")
@@ -25,3 +27,8 @@ class Property(models.Model):
 
     active = fields.Boolean('Active', default=True, help="If unchecked, it will allow you to hide the property without removing it.")
     state = fields.Selection([('new', 'New'), ('offer_received', 'Offer received'), ('sold', 'Sold')], string='Status', default='new', required=True)
+
+    @api.depends("living_area", "garden_area")
+    def _compute_total_area(self):
+        for record in self:
+            record.total_area = record.living_area + record.garden_area
