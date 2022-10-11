@@ -37,7 +37,7 @@ class Property(models.Model):
     @api.depends("offer_ids.price")
     def _compute_best_offer(self):
         for record in self:
-            record.best_offer = max(record.offer_ids.mapped('price'))
+            record.best_offer = max(record.offer_ids.mapped('price')) if record.offer_ids else False
 
     @api.onchange("garden")
     def _onchange_garden(self):
