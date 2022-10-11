@@ -27,7 +27,7 @@ class Property(models.Model):
     offer_ids = fields.One2many("estate.property.offer", "property_id", string="Offers")
 
     active = fields.Boolean('Active', default=True, help="If unchecked, it will allow you to hide the property without removing it.")
-    state = fields.Selection([('new', 'New'), ('offer_received', 'Offer received'), ('sold', 'Sold')], string='Status', default='new', required=True)
+    state = fields.Selection([('new', 'New'), ('offer_received', 'Offer received'), ('sold', 'Sold'), ('cancelled', 'Cancelled')], string='Status', default='new', required=True)
 
     @api.depends("living_area", "garden_area")
     def _compute_total_area(self):
