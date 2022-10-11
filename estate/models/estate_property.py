@@ -1,4 +1,5 @@
 from odoo import api, fields, models
+from odoo.exceptions import UserError
 
 class Property(models.Model):
     _name = "estate.property"
@@ -43,3 +44,8 @@ class Property(models.Model):
     def _onchange_garden(self):
         self.garden_area = 10 if self.garden else (self._origin.garden_area or False)
         self.garden_orientation = 'north' if self.garden else (self._origin.garden_orientation or False)
+
+    @api.ondelete(at_uninstall=False)
+    def _unlink_property(self):
+        if not any(property.state in s for s in ['new', 'cancelled'] for property in self):
+            raise UserError("Only new and active properties can be removed!")
