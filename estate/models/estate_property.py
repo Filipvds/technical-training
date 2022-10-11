@@ -47,5 +47,6 @@ class Property(models.Model):
 
     @api.ondelete(at_uninstall=False)
     def _unlink_property(self):
-        if not any(property.state in s for s in ['new', 'cancelled'] for property in self):
-            raise UserError("Only new and active properties can be removed!")
+        for record in self:
+            if not any(record.state in s for s in ['new', 'cancelled']):
+                raise UserError("Only new and active properties can be removed!")
